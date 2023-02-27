@@ -7,10 +7,10 @@ class State:
     def __init__(self, *args):
         if type(args[0]) == Problem:
             self.problem = args[0]
-            self.path = args[1]
+            self.parent = args[1]
         else:
             self.problem = Problem(args[0])
-            self.path = args[1]
+            self.parent = args[1]
 
     def is_goal(self) -> bool:
         for i in self.problem.pipes:
@@ -28,9 +28,7 @@ class State:
                 if i == j:
                     continue
                 if not self.problem.pipes[j].is_full() and not self.problem.pipes[i].is_empty():
-                    path = copy.deepcopy(self.path)
-                    path.append(self)
-                    s = State(copy.deepcopy(self.problem.pipes), path)
+                    s = State(copy.deepcopy(self.problem.pipes), self)
                     s.change_between_two_pipe(i, j)
                     l.append(s)
         return l

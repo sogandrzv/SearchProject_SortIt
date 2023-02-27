@@ -7,7 +7,7 @@ class Search:
     @staticmethod
     def bfs(prb: Problem) -> Solution:
         queue = []
-        state = State(prb, [])
+        state = State(prb, None)
         queue.append(state)
         explored = []
         while len(queue) > 0:

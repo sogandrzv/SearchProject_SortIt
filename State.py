@@ -12,7 +12,7 @@ class State:
             self.problem = Problem(args[0])
             self.parent = args[1]
 
-    def is_goal(self) -> bool:
+    def is_goal(self) -> bool:  # this method check this state is goal or not
         for i in self.problem.pipes:
             if not i.is_one_color():
                 return False
@@ -21,7 +21,7 @@ class State:
     def change_between_two_pipe(self, pipe_src_ind: int, pipe_dest_ind: int):
         self.problem.pipes[pipe_dest_ind].add_ball(self.problem.pipes[pipe_src_ind].remove_ball())
 
-    def successor(self) -> list:
+    def successor(self) -> list:  # this method for every state gives every possible states form this self and return it
         l = []
         for i in range(len(self.problem.pipes)):
             for j in range(len(self.problem.pipes)):

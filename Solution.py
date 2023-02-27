@@ -5,7 +5,7 @@ class Solution:
     def __init__(self, state: State):
         self.state = state
 
-    def print_path(self):
+    def print_path(self):  # this for show path of every search how it's done
         print('Init State')
         self.state.print_state()
         q = []

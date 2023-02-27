@@ -5,7 +5,8 @@ from State import State
 
 class Search:
     @staticmethod
-    def bfs(prb: Problem) -> Solution:
+    def bfs(prb: Problem) -> Solution:  # this method get a first state of Problem and do bfs for find solution if no
+        # solution is find return None else return the solution
         queue = []
         state = State(prb, None)
         queue.append(state)

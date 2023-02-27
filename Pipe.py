@@ -3,7 +3,7 @@ class Pipe:
         self.stack = stack
         self.limit = limit
 
-    def is_one_color(self) -> bool:
+    def is_one_color(self) -> bool:  # this function checks that all balls are the same color
         for i in range(1, len(self.stack)):
             if self.stack[i] != self.stack[i - 1]:
                 return False

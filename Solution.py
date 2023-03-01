@@ -1,19 +1,24 @@
+from Problem import Problem
 from State import State
 
 
 class Solution:
-    def __init__(self, state: State):
+    def __init__(self, state: State, problem: Problem):
         self.state = state
+        self.problem = problem
 
     def print_path(self):  # this for show path of every search how it's done
-        print('Init State')
-        self.state.print_state()
         q = []
         s = self.state.parent
         while s is not None:
-            q.append(s)
+            q.insert(0, s)
             s = s.parent
-        for index, s in enumerate(q):
+        print('Init State')
+        self.problem.print_state(q[0])
+        for index, s in enumerate(q[1:]):
             print('---------\n')
             print(f'next step => {index + 1}')
-            s.print_state()
+            self.problem.print_state(s)
+        print('---------\n')
+        print('Solution State')
+        self.problem.print_state(self.state)

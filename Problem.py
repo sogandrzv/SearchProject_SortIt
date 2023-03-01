@@ -13,7 +13,8 @@ class Problem:
         if type(args[-1]) == list:
             self.set_path_cost(args[-1])
 
-    def is_goal(self, state: State) -> bool:  # this method check this state is goal or not
+    @staticmethod
+    def is_goal(state: State) -> bool:  # this method check this state is goal or not
         for i in state.pipes:
             if not i.is_one_color() or (not (i.is_full() or i.is_empty())):
                 return False
@@ -32,7 +33,8 @@ class Problem:
                     child.append(s)
         return child
 
-    def print_state(self, state: State):
+    @staticmethod
+    def print_state(state: State):
         for i in state.pipes:
             i.print_pipe()
 

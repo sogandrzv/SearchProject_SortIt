@@ -1,4 +1,3 @@
-from State import State
 from Solution import Solution
 from Problem import Problem
 
@@ -18,6 +17,6 @@ class Search:
             for c in neighbors:
                 if not explored.__contains__(c.__hash__()):
                     if prb.is_goal(state):
-                        return Solution(state,prb)
+                        return Solution(state, prb)
                     queue.append(c)
         return None

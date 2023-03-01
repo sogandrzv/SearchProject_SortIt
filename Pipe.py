@@ -30,3 +30,9 @@ class Pipe:
         for i in self.stack:
             print(i, end=' ')
         print('}')
+
+    def __hash__(self):
+        hash_string = ''
+        for i in self.stack:
+            hash_string += str(i)
+        return hash_string

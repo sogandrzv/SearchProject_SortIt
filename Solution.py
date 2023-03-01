@@ -8,17 +8,17 @@ class Solution:
         self.problem = problem
 
     def print_path(self):  # this for show path of every search how it's done
-        q = []
-        s = self.state.parent
-        while s is not None:
-            q.insert(0, s)
-            s = s.parent
+        queue = []
+        state = self.state.parent
+        while state is not None:
+            queue.insert(0, state)
+            state = state.parent
         print('Init State')
-        self.problem.print_state(q[0])
-        for index, s in enumerate(q[1:]):
+        self.problem.print_state(queue[0])
+        for index, state in enumerate(queue[1:]):
             print('---------\n')
             print(f'next step => {index + 1}')
-            self.problem.print_state(s)
+            self.problem.print_state(state)
         print('---------\n')
         print('Solution State')
         self.problem.print_state(self.state)

@@ -9,9 +9,11 @@ class State:
         self.pipes[pipe_dest_ind].add_ball(self.pipes[pipe_src_ind].remove_ball())
 
     def __hash__(self):
-        hash_string = ''
+        hash_strings = []
         for i in self.pipes:
-            for j in i.stack:
-                hash_string += str(j)
-            hash_string += '###'
+            hash_strings.append(i.__hash__())
+        hash_strings = sorted(hash_strings)
+        hash_string = ''
+        for i in hash_strings:
+            hash_string += i + '###'
         return hash_string

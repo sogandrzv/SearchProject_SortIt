@@ -31,6 +31,16 @@ class Pipe:
             print(i, end=' ')
         print('}')
 
+    def get_pipe_for_gui(self):
+        # p1=RGB,p2=RBR,p3=GBR,p4=GGG,p5=E,p6=E,p7=E,p8=E
+        out = ""
+        if len(self.stack) == 0:
+            out += 'E'
+            return out
+        for i in self.stack:
+            out += (str(i[0]).upper())
+        return out
+
     def __hash__(self):
         hash_string = ''
         for i in self.stack:

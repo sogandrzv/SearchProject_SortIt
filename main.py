@@ -4,9 +4,15 @@ from State import State
 from Search import Search
 
 if __name__ == '__main__':
-    p1 = Pipe(['red', 'red', 'blue'], 4)
-    p2 = Pipe(['blue', 'blue', 'blue'], 4)
-    p3 = Pipe(['red', 'red'], 4)
+    test_path = 'tests/test1.txt'
+    file = open(test_path, 'r')
+    p = []
+    for i in file.readlines():
+        a = i.replace('\n', '')
+        a = a.replace(' ', '')
+        a = a.split(',')
+        p.append(Pipe(a[:-1], int(a[-1])))
 
-    s = Search.bfs(Problem(State([p1, p2, p3], None, 0)))
+    s = Search.bfs(Problem(State(p, None, 0, (0, 0))))
     s.print_path()
+    s.execute_gui()

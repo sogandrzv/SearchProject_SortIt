@@ -28,7 +28,7 @@ class Problem:
                 if i == j:
                     continue
                 if not state.pipes[j].is_full() and not state.pipes[i].is_empty():
-                    s = State(copy.deepcopy(state.pipes), state, self.get_cost_from_change(state, i))
+                    s = State(copy.deepcopy(state.pipes), state, self.get_cost_from_change(state, i), (i, j))
                     s.change_between_two_pipe(i, j)
                     child.append(s)
         return child
@@ -37,6 +37,14 @@ class Problem:
     def print_state(state: State):
         for i in state.pipes:
             i.print_pipe()
+
+    @staticmethod
+    def get_state_for_gui(state: State):
+        out = ""
+        for i in range(len(state.pipes)):
+            out += 'p' + str(i + 1) + '=' + state.pipes[i].get_pipe_for_gui() + ','
+        out = out[:len(out) - 1] + '\n'
+        return out
 
     def get_cost_from_change(self, state: State, pipe_src_ind: int) -> int:
         if state.pipes[pipe_src_ind].stack[-1] == 'red':

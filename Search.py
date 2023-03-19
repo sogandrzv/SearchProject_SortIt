@@ -109,3 +109,26 @@ class Search:
                     hashmap[c.__hash__()] = True
         return None
 
+    @staticmethod
+    def A_star(prb: Problem) -> Solution:
+        start_time = datetime.now()
+        hashmap = {}
+        pqueue = queue.PriorityQueue()
+        state = prb.initState
+        state.set_f_n()
+        pqueue.put((state.f_n, state))
+        hashmap[state.__hash__()] = True
+
+        while not pqueue.empty():
+            state = pqueue.get()[1]
+            if prb.is_goal(state):
+                return Solution(state, prb, start_time)
+
+            children = prb.successor(state)
+            for c in children:
+                if c.__hash__() not in hashmap:
+                    c.set_f_n()
+                    pqueue.put((c.f_n, c))
+                    hashmap[c.__hash__()] = True
+        return None
+

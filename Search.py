@@ -34,3 +34,25 @@ class Search:
                     return Solution(c, prb, start_time)
                 stack.append(c)
         return None
+
+    @staticmethod
+    def optimized_dfs(prb: Problem) -> Solution:
+        start_time = datetime.now()
+        hashmap = {}
+        stack = []
+        state = prb.initState
+        stack.append(state)
+        hashmap[state.__hash__()] = True
+
+        while len(stack) > 0:
+            state = stack.pop()
+            # hashmap[state.__hash__()] = False
+            children = prb.successor(state)
+            for c in children:
+                if prb.is_goal(c):
+                    return Solution(c, prb, start_time)
+                if c.__hash__() not in hashmap:
+                    stack.append(c)
+                    hashmap[c.__hash__()] = True
+        return None
+

@@ -33,6 +33,19 @@ class Problem:
                     child.append(s)
         return child
 
+
+    def ucs_successor(self, state: State) -> list:
+        child = []
+        for i in range(len(state.pipes)):
+            for j in range(len(state.pipes)):
+                if i == j:
+                    continue
+                if not state.pipes[j].is_full() and not state.pipes[i].is_empty():
+                    s = State(copy.deepcopy(state.pipes), state, state.g_n + abs(i-j), (i, j))
+                    s.change_between_two_pipe(i, j)
+                    child.append(s)
+        return child
+
     @staticmethod
     def print_state(state: State):
         for i in state.pipes:

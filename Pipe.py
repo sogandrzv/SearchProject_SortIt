@@ -46,3 +46,15 @@ class Pipe:
         for i in self.stack:
             hash_string += str(i)
         return hash_string
+
+    def color_variety(self):
+        list_colors = {}
+        for i in range(len(self.stack) - 1):
+            list_colors[self.stack[i]] += 1
+        return len(list_colors)
+
+
+
+
+
+

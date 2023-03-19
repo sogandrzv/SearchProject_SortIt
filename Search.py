@@ -198,3 +198,10 @@ class Search:
                 return result, -1
 
 
+    @staticmethod
+    def recursive_best_first_search(prb: Problem) -> Solution:
+        solution, f_limit = Search.rbfs(prb, prb.initState, 999999)
+        if f_limit == -1:
+            return solution
+        else:
+            return None

@@ -78,4 +78,34 @@ class Search:
                     hashmap[c.__hash__()] = True
         return None
 
+    @staticmethod
+    def ids(prb: Problem):
+        k = 0
+        while True:
+            solution = Search.limited_dfs(prb,k)
+            k += 1
+            if solution is not None:
+                return solution
+
+    @staticmethod
+    def ucs(prb: Problem) -> Solution:
+        start_time = datetime.now()
+        hashmap = {}
+        pqueue = queue.PriorityQueue()
+        state = prb.initState
+        pqueue.put((state.g_n, state))
+        hashmap[state.__hash__()] = True
+
+        while not pqueue.empty():
+            state = pqueue.get()[1]
+            if prb.is_goal(state):
+                return Solution(state, prb, start_time)
+
+            children = prb.ucs_successor(state)
+            for c in children:
+                if c.__hash__() not in hashmap:
+
+                    pqueue.put((c.g_n, c))
+                    hashmap[c.__hash__()] = True
+        return None
 

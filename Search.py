@@ -170,4 +170,31 @@ class Search:
 
         return None
 
+    @staticmethod
+    def rbfs(prb: Problem, node, f_limit: int):  # -1 -> goal
+        start_time = datetime.now()
+        if prb.is_goal(node):
+            return Solution(node, prb, start_time), -1
+        children = prb.successor(node)
+        if not bool(children):  # children list is empty
+            return None, 999999
+
+        for c in children:
+            c.f_n = max((c.g_n + c.h_n()), node.f_n)
+
+        while True:
+            for i in range(2):
+                for j in range(0, len(children) - i - 1):
+                    if children[j].f_n < children[j + 1].f_n:
+                        children[j], children[j + 1] = children[j + 1], children[j]
+
+            best_node = children[len(children) - 1]
+
+            if best_node.f_n > f_limit:
+                return None, best_node.f_n
+            second_best_node = children[len(children) - 2]
+            result, best_node.f_n = Search.rbfs(prb, best_node, min(f_limit, second_best_node.f_n))
+            if result is not None:
+                return result, -1
+
 

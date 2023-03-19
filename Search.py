@@ -132,3 +132,42 @@ class Search:
                     hashmap[c.__hash__()] = True
         return None
 
+    @staticmethod
+    def ida_star(prb: Problem) -> Solution:
+        prb.initState.set_f_n()
+        cutoff = prb.initState.f_n
+
+        while True:
+            min_f_n = 999999
+            start_time = datetime.now()
+            hashmap = {}
+            stack = []
+            state = prb.initState
+            stack.append(state)
+            hashmap[state.__hash__()] = True
+
+            while len(stack) > 0:
+                state = stack.pop()
+                hashmap[state.__hash__()] = False
+                children = prb.successor(state)
+
+                for c in children:
+
+                    if prb.is_goal(c):
+                        return Solution(c, prb, start_time)
+
+                    c.set_f_n()
+                    if cutoff < c.f_n < min_f_n:
+                        min_f_n = c.f_n
+
+                    if c.__hash__() not in hashmap and c.f_n <= cutoff:
+                        stack.append(c)
+                        hashmap[c.__hash__()] = True
+
+            cutoff = min_f_n
+            if cutoff > 1000:  # TODO increase limit
+                break
+
+        return None
+
+
